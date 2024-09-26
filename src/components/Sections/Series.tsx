@@ -4,7 +4,7 @@ export default function Series() {
   return (
     <section className="">
       <h1>New Release - Series</h1>
-      <div className="flex justify-center gap-3">
+      <div className="flex justify-between gap-3">
         <SerieCard />
         <SerieCard />
         <SerieCard />

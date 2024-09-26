@@ -3,7 +3,7 @@ import Header from "./components/Header/Header";
 
 export default function App() {
   return (
-    <div className="h-screen w-screen bg-slate-600">
+    <div className="h-full w-full bg-slate-600">
       <Header />
       <Outlet />
     </div>

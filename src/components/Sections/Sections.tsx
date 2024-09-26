@@ -3,9 +3,11 @@ import Series from "./Series";
 import Trending from "./Trending";
 
 export default function Sections() {
-    return <div className="grid mx-[5rem]">
-        <Trending/>
-        <Movies/>
-        <Series/>
+  return (
+    <div className="grid mx-[20%]">
+      <Trending />
+      <Movies />
+      <Series />
     </div>
+  );
 }
