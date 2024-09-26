@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.button {
+  @apply rounded-sm flex items-center justify-center p-2.5 font-semibold;
+}
+
+.button-primary {
+  @apply bg-red-500;
+}
+
+.button-transparent {
+  @apply bg-transparent border border-red-500;
+}
+
+.movie-attribute {
+  @apply flex text-sm font-medium rounded-xl p-1.5;
+}
