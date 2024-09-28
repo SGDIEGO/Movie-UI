@@ -8,7 +8,7 @@ export default function MovieDisplay({ movie }: { movie: Movie }) {
         backgroundImage: `url('https://i.blogs.es/0ca9a6/aa/1366_2000.jpeg')`,
       }}
     >
-      <div>
+      <div className="flex gap-8">
         <button className="button button-primary">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -42,10 +42,10 @@ export default function MovieDisplay({ movie }: { movie: Movie }) {
           </svg>
         </button>
       </div>
-      <div>
-        <div>
+      <div className="grid gap-4">
+        <div className="grid">
           <h3>{movie.title}</h3>
-          <div>
+          <div className="flex gap-3">
             {movie.genres?.map((genre) => (
               <span className="bg-white text-black text-sm font-medium rounded-xl p-1.5">
                 {genre.name}
@@ -102,9 +102,8 @@ export default function MovieDisplay({ movie }: { movie: Movie }) {
             </span>
           </div>
         </div>
-        <div>{movie.overview}</div>
+        <p className="text-xs">{movie.overview}</p>
       </div>
-      <div></div>
     </section>
   );
 }

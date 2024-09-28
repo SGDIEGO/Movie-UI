@@ -6,11 +6,6 @@ import Sections from "../../components/Sections/Sections";
 export default function Home() {
   const [movie, setMovie] = useState({} as Movie);
   useEffect(() => {
-    // fetch movie data here
-    // const response = await fetch("https://api.example.com/movies/1");
-    // const data = await response.json();
-    // setMovie(data);
-    // or mock data
     setMovie({
       id: 1,
       title: "titulo1",
