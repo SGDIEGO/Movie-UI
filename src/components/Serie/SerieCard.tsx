@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 interface ISerie {
   id: number
   name: string
@@ -6,7 +8,7 @@ interface ISerie {
 
 export default function SerieCard({serie} : {serie:ISerie}) {
   return (
-    <div className="grid w-[256px] hover:cursor-pointer">
+    <Link to={`/series/${serie.id}`} className="grid w-[256px] hover:cursor-pointer">
       {/* Image */}
       <div className="h-[392px] w-full relative">
         <img
@@ -27,6 +29,6 @@ export default function SerieCard({serie} : {serie:ISerie}) {
           </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

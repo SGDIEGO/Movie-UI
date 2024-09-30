@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Movie.css";
 
 interface IMovie {
@@ -8,7 +9,7 @@ interface IMovie {
 
 export default function MovieCard({ movie }: { movie: IMovie }) {
   return (
-    <div className="grid w-[256px]">
+    <Link to={`/movies/${movie.id}`} className="grid w-[256px] hover:cursor-pointer">
       {/* Image */}
       <div className="h-[392px] w-full">
         <img
@@ -28,6 +29,6 @@ export default function MovieCard({ movie }: { movie: IMovie }) {
           </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

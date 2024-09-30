@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 
-export function useFetch(url: string, opts: RequestInit | null) {
+export function useFetch(
+  url: string,
+  opts: RequestInit | null,
+  deps?: React.DependencyList
+) {
   // Fetch data when component mounts
   const [data, setData] = useState();
 
@@ -25,7 +29,7 @@ export function useFetch(url: string, opts: RequestInit | null) {
         throw new Error("Failed to fetch data: " + error);
       }
     })();
-  }, []);
+  }, deps);
 
   // Return the fetched data and a function to refetch the data
   return { data, setData };

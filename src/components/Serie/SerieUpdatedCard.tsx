@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 interface ISerie {
   id: number;
   name: string;
@@ -7,7 +9,7 @@ interface ISerie {
 
 export default function SerieUpdatedCard({ serie }: { serie: ISerie }) {
   return (
-    <div className="flex items-center gap-4 w-[206px] h-[103px] text-sm">
+    <Link to={`/series/${serie.id}`} className="flex items-center gap-4 w-[206px] h-[103px] text-sm">
       <div className=" w-[64px] h-full">
         <img
           className="w-full h-full object-cover"
@@ -20,6 +22,6 @@ export default function SerieUpdatedCard({ serie }: { serie: ISerie }) {
         <p>Series/ S 2/EP 9</p>
         <span>{serie.first_air_date}</span>
       </div>
-    </div>
+    </Link>
   );
 }

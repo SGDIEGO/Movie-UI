@@ -3,15 +3,19 @@
 @tailwind utilities;
 
 .button {
-  @apply rounded-sm flex items-center justify-center p-2.5 font-semibold;
+  @apply rounded-sm flex items-center justify-center font-semibold;
 }
 
 .button-primary {
-  @apply bg-red-500;
+  @apply bg-red-500 p-2.5;
+}
+
+.button-selected {
+  @apply rounded-lg bg-red-500 p-1;
 }
 
 .button-transparent {
-  @apply bg-transparent border border-red-500;
+  @apply bg-transparent border border-red-500 p-2.5;
 }
 
 .movie-attribute {

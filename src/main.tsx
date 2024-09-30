@@ -7,6 +7,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Movies from "./pages/Movies/index.tsx";
 import Home from "./pages/Home/index.tsx";
 import Movie from "./pages/Movies/Movie/index.tsx";
+import Series from "./pages/Series/index.tsx";
+import Serie from "./pages/Series/Serie/index.tsx";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +21,13 @@ const router = createBrowserRouter([
         element: <Movies />,
         children: [{ path: ":id", element: <Movie /> }],
       },
-      { path: "series", element: <Movies /> },
+      { path: "series", element: <Movies />, children: [
+        {
+          path: ":id",
+          element: <Series/>,
+          children: [{ path: ":id", element: <Serie /> }],
+        }
+      ] },
       { path: "animation", element: <Movies /> },
     ],
   },

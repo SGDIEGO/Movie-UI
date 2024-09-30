@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 interface IMovie {
   id: number;
   title: string;
@@ -20,7 +22,7 @@ export default function MovieTrendingCard({ movie }: { movie: IMovie }) {
   }
 
   return (
-    <div className="h-[341px] w-[352px] hover:cursor-pointer">
+    <Link to={`/movies/${movie.id}`} className="h-[341px] w-[352px] hover:cursor-pointer">
       <div className="relative h-[293px] w-full">
         <img
           className="w-full h-full object-cover"
@@ -50,6 +52,6 @@ export default function MovieTrendingCard({ movie }: { movie: IMovie }) {
           <RenderGenres />
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
