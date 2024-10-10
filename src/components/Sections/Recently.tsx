@@ -1,11 +1,14 @@
 import SerieUpdatedCard from "../Serie/SerieUpdatedCard";
 import { useFetch } from "../../hooks/useFetch";
+import { BEARER_TOKEN } from "../../data/token";
+import { ISerie } from "../../types/Movie.types";
 
-const BEARER_TOKEN =
-  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNzM1OTdkMWJkZjMxN2YwNWU0MWNjOWE4MWQxZGQzNyIsIm5iZiI6MTcyNzQ3NDQ0OC4xNDk2NjYsInN1YiI6IjY2ZjRkOGFmNWU0MGI1MTJlZmVkMmM1YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qEYAytKbx-LXzyQ-e-PFCGvwTHbJIPnqSmyXsoAOqYk";
+interface IAiringToday {
+  page: number;
+  results: Array<ISerie>;
+}
 
 export default function Recently() {
-  // Load data from API
   const { data } = useFetch(
     "https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=1'",
     {
@@ -16,17 +19,13 @@ export default function Recently() {
     }
   );
 
-  // Render the series data
   function RenderSeries() {
-    // Check if the data is available
     if (data == null) return;
 
-    // Get the series data from the API response
-    const series = (data as any).results;
+    const series = (data as IAiringToday).results;
     const seriesToRender = series.slice(0, 4);
 
-    // Render the series as cards
-    return seriesToRender.map((serie: any, id: number) => (
+    return seriesToRender.map((serie, id) => (
       <SerieUpdatedCard key={id} serie={serie} />
     ));
   }

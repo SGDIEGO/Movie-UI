@@ -3,18 +3,21 @@ import { Link } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch";
 import MovieCard from "../Movie/MovieCard";
 import SerieCard from "../Serie/SerieCard";
+import { BEARER_TOKEN } from "../../data/token";
+import { IMovie, ISerie } from "../../types/Movie.types";
 
-const BEARER_TOKEN =
-  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNzM1OTdkMWJkZjMxN2YwNWU0MWNjOWE4MWQxZGQzNyIsIm5iZiI6MTcyNzQ3NDQ0OC4xNDk2NjYsInN1YiI6IjY2ZjRkOGFmNWU0MGI1MTJlZmVkMmM1YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qEYAytKbx-LXzyQ-e-PFCGvwTHbJIPnqSmyXsoAOqYk";
+interface ITopRatedMovie {
+  page: number
+  results: Array<IMovie | ISerie>;
+}
 
 export default function Recommend() {
-  // Recommended state
   const [recommend, setRecommend] = useState("movies");
   const [urlFetch, setUrlFetch] = useState("https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1")
 
-  // Change the recommendation v
   useEffect(() => {
-    // Update the url based on the selected recommendation type
+    console.log("ccc");
+
     switch (recommend) {
       case "movies":
         setUrlFetch("https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1")
@@ -25,7 +28,6 @@ export default function Recommend() {
     }
   }, [recommend])
 
-  // Load data from API
   const { data } = useFetch(
     urlFetch,
     {
@@ -34,29 +36,24 @@ export default function Recommend() {
         Authorization: `Bearer ${BEARER_TOKEN}`,
       },
     },
-    [recommend]
+    [urlFetch]
   );
 
-  // Render the movies data
   function RenderData() {
-    // Check if the data is available
     if (data == null) return;
 
-    // Get the movies data from the API response
-    const list = (data as any).results;
+    const list = (data as ITopRatedMovie).results;
     const listToRender = list.slice(0, 8);
 
-    // Render the movies or series as cards based on the selected recommendation type
     switch (recommend) {
       case "movies":
-        // Render the movies as cards
-        return listToRender.map((movie: any, id: number) => (
-          <MovieCard key={id} movie={movie} />
+        return listToRender.map((movie, id) => (
+          <MovieCard key={id} movie={movie as IMovie} />
         ));
 
       case "series":
-        return listToRender.map((serie: any, id: number) => (
-          <SerieCard key={id} serie={serie} />
+        return listToRender.map((serie, id) => (
+          <SerieCard key={id} serie={serie as ISerie} />
         ));
       default:
         return <></>;
@@ -64,17 +61,16 @@ export default function Recommend() {
   }
 
   return (
-    <section>
+    <section className="">
       <div className="flex gap-4 justify-between">
         <div className="flex">
           <h3>Recommend</h3>
           <div className="flex gap-4">
             <button
-              className={`button ${
-                recommend === "movies"
-                  ? "button-selected"
-                  : "button-transparent"
-              }`}
+              className={`button ${recommend === "movies"
+                ? "button-selected"
+                : "button-transparent"
+                }`}
               onClick={() => {
                 setRecommend("movies");
               }}
@@ -82,11 +78,10 @@ export default function Recommend() {
               <span>Movies</span>
             </button>
             <button
-              className={`button ${
-                recommend === "series"
-                  ? "button-selected"
-                  : "button-transparent"
-              }`}
+              className={`button ${recommend === "series"
+                ? "button-selected"
+                : "button-transparent"
+                }`}
               onClick={() => {
                 setRecommend("series");
               }}
@@ -94,11 +89,10 @@ export default function Recommend() {
               <span>Series</span>
             </button>
             <button
-              className={`button ${
-                recommend === "animations"
-                  ? "button-selected"
-                  : "button-transparent"
-              }`}
+              className={`button ${recommend === "animations"
+                ? "button-selected"
+                : "button-transparent"
+                }`}
               onClick={() => {
                 setRecommend("animations");
               }}
@@ -126,8 +120,8 @@ export default function Recommend() {
           </svg>
         </Link>
       </div>
-      
-      <div className="grid grid-cols-4">
+
+      <div className="grid grid-cols-4 place-items-center">
         <RenderData />
       </div>
     </section>

@@ -1,8 +1,16 @@
+import { BEARER_TOKEN } from "../../data/token";
 import { useFetch } from "../../hooks/useFetch";
+import { IMovie } from "../../types/Movie.types";
 import MovieCard from "../Movie/MovieCard";
 
-const BEARER_TOKEN =
-  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNzM1OTdkMWJkZjMxN2YwNWU0MWNjOWE4MWQxZGQzNyIsIm5iZiI6MTcyNzQ3NDQ0OC4xNDk2NjYsInN1YiI6IjY2ZjRkOGFmNWU0MGI1MTJlZmVkMmM1YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qEYAytKbx-LXzyQ-e-PFCGvwTHbJIPnqSmyXsoAOqYk";
+interface IUpcoming {
+  date: {
+    maximum: string
+    minimum: string;
+  },
+  page: number;
+  results: Array<IMovie>;
+}
 
 export default function Movies() {
   // Load data from API
@@ -22,11 +30,11 @@ export default function Movies() {
     if (data == null) return;
 
     // Get the movies data from the API response
-    const movies = (data as any).results;
+    const movies = (data as IUpcoming).results;
     const moviesToRender = movies.slice(0, 4);
 
     // Render the movies as cards
-    return moviesToRender.map((movie: any, id: number) => (
+    return moviesToRender.map((movie, id) => (
       <MovieCard key={id} movie={movie} />
     ));
   }

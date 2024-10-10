@@ -1,11 +1,5 @@
 import { Link } from "react-router-dom";
-
-interface ISerie {
-  id: number;
-  name: string;
-  first_air_date: string;
-  backdrop_path: string;
-}
+import { ISerie } from "../../types/Movie.types";
 
 export default function SerieUpdatedCard({ serie }: { serie: ISerie }) {
   return (
@@ -13,7 +7,7 @@ export default function SerieUpdatedCard({ serie }: { serie: ISerie }) {
       <div className=" w-[64px] h-full">
         <img
           className="w-full h-full object-cover"
-          src={"https://image.tmdb.org/t/p/w500/" + serie.backdrop_path}
+          src={"https://image.tmdb.org/t/p/w500/" + serie.poster_path}
           alt=""
         />
       </div>

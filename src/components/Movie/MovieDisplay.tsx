@@ -1,6 +1,6 @@
-import { Movie } from "../../types/Movie.types";
+import { IMovie } from "../../types/Movie.types";
 
-export default function MovieDisplay({ movie }: { movie: Movie }) {
+export default function MovieDisplay({ movie }: { movie: IMovie }) {
   return (
     <section
       className="relative h-[500px] w-full bg-cover bg-center"
@@ -46,9 +46,9 @@ export default function MovieDisplay({ movie }: { movie: Movie }) {
         <div className="grid">
           <h3>{movie.title}</h3>
           <div className="flex gap-3">
-            {movie.genres?.map((genre) => (
+            {movie.genre_ids?.map((genre_id) => (
               <span className="bg-white text-black text-sm font-medium rounded-xl p-1.5">
-                {genre.name}
+                {genre_id}
               </span>
             ))}
 

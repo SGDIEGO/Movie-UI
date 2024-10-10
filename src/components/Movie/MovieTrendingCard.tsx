@@ -1,21 +1,12 @@
 import { Link } from "react-router-dom";
-
-interface IMovie {
-  id: number;
-  title: string;
-  release_date: string;
-  backdrop_path: string;
-  genre_ids: number[];
-}
+import { IMovie } from "../../types/Movie.types";
 
 export default function MovieTrendingCard({ movie }: { movie: IMovie }) {
-  // Render the genres for the movie
   function RenderGenres() {
-    // Fetch the genres data from an API (e.g., using useEffect hook)
     const genres = movie.genre_ids
       .slice(0, 3)
       .map((genreId: number, index: number) => (
-        <span className="bg-red-500 rounded-md p-2">Action</span>
+        <span key={index} className="bg-red-500 rounded-md p-2">{genreId}</span>
       ));
 
     return genres;
@@ -26,7 +17,7 @@ export default function MovieTrendingCard({ movie }: { movie: IMovie }) {
       <div className="relative h-[293px] w-full">
         <img
           className="w-full h-full object-cover"
-          src={"https://image.tmdb.org/t/p/w500/" + movie.backdrop_path}
+          src={"https://image.tmdb.org/t/p/w500/" + movie.poster_path}
           alt=""
         />
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">

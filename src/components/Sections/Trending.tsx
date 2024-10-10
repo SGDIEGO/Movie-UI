@@ -1,8 +1,14 @@
 import { useFetch } from "../../hooks/useFetch";
+import { IMovie } from "../../types/Movie.types";
 import MovieTrendingCard from "../Movie/MovieTrendingCard";
 
 const BEARER_TOKEN =
   "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNzM1OTdkMWJkZjMxN2YwNWU0MWNjOWE4MWQxZGQzNyIsIm5iZiI6MTcyNzQ3NDQ0OC4xNDk2NjYsInN1YiI6IjY2ZjRkOGFmNWU0MGI1MTJlZmVkMmM1YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qEYAytKbx-LXzyQ-e-PFCGvwTHbJIPnqSmyXsoAOqYk";
+
+interface IPopular {
+  page: number;
+  results: Array<IMovie>;
+}
 
 export default function Trending() {
   // Load data from API
@@ -18,15 +24,12 @@ export default function Trending() {
 
   // Render the movies data
   function RenderMovies() {
-    // Check if the data is available
     if (data == null) return;
 
-    // Get the movies data from the API response
-    const movies = (data as any).results;
+    const movies = (data as IPopular).results;
     const moviesToRender = movies.slice(0, 3);
 
-    // Render the movies as cards
-    return moviesToRender.map((movie: any, id: number) => (
+    return moviesToRender.map((movie, id) => (
       <MovieTrendingCard key={id} movie={movie} />
     ));
   }
