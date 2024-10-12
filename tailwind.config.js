@@ -3,9 +3,10 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      margin: {
+      colors: {
+        primary: "#ef4444"
       }
-    },
+    }
   },
   plugins: [],
 };

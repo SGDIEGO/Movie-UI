@@ -16,7 +16,8 @@ export default function Recently() {
         accept: "application/json",
         Authorization: `Bearer ${BEARER_TOKEN}`,
       },
-    }
+    },
+    []
   );
 
   function RenderSeries() {

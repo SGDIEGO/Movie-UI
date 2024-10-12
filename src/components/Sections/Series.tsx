@@ -16,7 +16,8 @@ export default function Series() {
         accept: "application/json",
         Authorization: `Bearer ${BEARER_TOKEN}`,
       },
-    }
+    },
+    []
   );
 
   // Render the series data

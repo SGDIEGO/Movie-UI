@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
-export function useFetch(
+export function useFetch<T>(
   url: string,
   opts: RequestInit | null,
   deps?: React.DependencyList
 ) {
-  const [data, setData] = useState();
+  const [data, setData] = useState<T>();
 
   useEffect(() => {
     (async () => {

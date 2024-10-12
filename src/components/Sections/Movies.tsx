@@ -21,7 +21,8 @@ export default function Movies() {
         accept: "application/json",
         Authorization: `Bearer ${BEARER_TOKEN}`,
       },
-    }
+    },
+    []
   );
 
   // Render the movies data

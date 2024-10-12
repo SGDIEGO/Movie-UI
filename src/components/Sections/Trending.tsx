@@ -11,7 +11,6 @@ interface IPopular {
 }
 
 export default function Trending() {
-  // Load data from API
   const { data } = useFetch(
     "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
     {
@@ -19,10 +18,10 @@ export default function Trending() {
         accept: "application/json",
         Authorization: `Bearer ${BEARER_TOKEN}`,
       },
-    }
+    },
+    []
   );
 
-  // Render the movies data
   function RenderMovies() {
     if (data == null) return;
 
@@ -34,7 +33,6 @@ export default function Trending() {
     ));
   }
 
-  // Render the trending section
   return (
     <section>
       <h3>Trending</h3>
