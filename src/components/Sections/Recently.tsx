@@ -32,9 +32,9 @@ export default function Recently() {
   }
 
   return (
-    <section>
-      <h3>Recently Updated</h3>
-      <div className="flex justify-between">
+    <section className="">
+      <h3 className="my-5 font-semibold text-[24px]">Recently Updated</h3>
+      <div className="grid screen2:grid-cols-2 screen4:grid-flow-col place-content-center gap-3">
         <RenderSeries />
         <svg
           xmlns="http://www.w3.org/2000/svg"

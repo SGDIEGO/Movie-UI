@@ -1,11 +1,13 @@
 import { Outlet } from "react-router-dom";
-import Header from "./components/Header/Header";
+import { AppContextProvider } from "./context/app.context";
+import { SearchContextProvider } from "./context/search.context";
 
 export default function App() {
   return (
-    <div className="h-full w-full bg-black">
-      <Header />
-      <Outlet />
-    </div>
+    <AppContextProvider>
+      <SearchContextProvider>
+        <Outlet/>
+      </SearchContextProvider>
+    </AppContextProvider>
   );
 }

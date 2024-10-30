@@ -27,14 +27,11 @@ export default function Movies() {
 
   // Render the movies data
   function RenderMovies() {
-    // Check if the data is available
     if (data == null) return;
 
-    // Get the movies data from the API response
     const movies = (data as IUpcoming).results;
     const moviesToRender = movies.slice(0, 4);
 
-    // Render the movies as cards
     return moviesToRender.map((movie, id) => (
       <MovieCard key={id} movie={movie} />
     ));
@@ -42,8 +39,8 @@ export default function Movies() {
 
   return (
     <section>
-      <h3>New Release - Movie</h3>
-      <div className="flex justify-between gap-3">
+      <h3 className="my-5 font-semibold text-[24px]">New Release - Movie</h3>
+      <div className="grid place-items-center gap-3 screen3:grid-cols-2 screen4:grid-cols-4">
         <RenderMovies />
       </div>
     </section>

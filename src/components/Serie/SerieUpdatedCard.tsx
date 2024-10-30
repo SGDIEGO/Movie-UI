@@ -1,15 +1,26 @@
 import { Link } from "react-router-dom";
 import { ISerie } from "../../types/Movie.types";
 import { useState } from "react";
+import SerieCardHover from "./SerieCardHover";
 
 export default function SerieUpdatedCard({ serie }: { serie: ISerie }) {
   const [posterpath, setPosterpath] = useState(serie.poster_path)
+  const [hover, setHover] = useState(false)
+
   const onErrorImg = () => {
     setPosterpath(undefined)
   }
 
+  const onMouseEnterFn = () => {
+    setHover(true)
+  }
+
+  const onMouseLeaveFn = () => {
+    setHover(false)
+  }
+
   return (
-    <Link to={`/series/${serie.id}`} className="flex items-center gap-4 w-[206px] h-[103px] text-sm">
+    <Link to={`/series/${serie.id}`} className="relative flex items-center gap-4 w-[206px] h-[103px] text-sm" onMouseEnter={onMouseEnterFn} onMouseLeave={onMouseLeaveFn}>
       <div className=" w-[64px] h-full">
         {(posterpath) ?
           <img
@@ -28,6 +39,8 @@ export default function SerieUpdatedCard({ serie }: { serie: ISerie }) {
         <p>Series/ S 2/EP 9</p>
         <span>{serie.first_air_date}</span>
       </div>
+
+      {hover ? <SerieCardHover serie={serie} /> : null}
     </Link>
   );
 }

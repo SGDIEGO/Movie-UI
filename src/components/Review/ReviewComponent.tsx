@@ -1,4 +1,6 @@
 import { IReview } from "../../types/Review.types"
+import { formatDate } from "../../utils/date"
+import AvatarComponent from "../Avatar/Avatar"
 
 type TReview = "others" | "self"
 
@@ -8,16 +10,11 @@ interface IReviewProps {
 }
 
 export default function ReviewComponent(props: IReviewProps) {
-    if (props?.type == "self") return <div className="flex">
-        <div className="w-[128px] h-[128px]">
-            <img
-                className="rounded-[50%]"
-                src={"https://image.tmdb.org/t/p/w500/" + props.data?.author_details.avatar_path}
-                alt="profile"
-            />
-        </div>
-        <div className="w-full h-full">
-            <h5>{props.data?.author_details.username}</h5>
+    if (props?.type == "self") return <div className="flex gap-5">
+        <AvatarComponent external="https://avatars.githubusercontent.com/u/89821034?v=4" />
+
+        <div className="grid w-full h-full">
+            <h5>Diego Segura</h5>
             <textarea
                 className="w-full h-[72px] rounded-xl"
                 name=""
@@ -27,18 +24,13 @@ export default function ReviewComponent(props: IReviewProps) {
         </div>
     </div>
 
-    return <div className="flex">
-        <div className="w-[128px] h-[128px]">
-            <img
-                className="rounded-[50%]"
-                src={"https://image.tmdb.org/t/p/w500/" + props?.data?.author_details.avatar_path}
-                alt="profile"
-            />
-        </div>
-        <div className="w-full h-full">
+    return <div className="flex gap-5">
+        <AvatarComponent url={props?.data?.author_details.avatar_path} />
+        <div className="grid w-full h-full text-base gap-1">
             <h5>{props?.data?.author_details.username}</h5>
-            <span>{props?.data?.created_at}</span>
+            <span>{formatDate(props?.data?.created_at ?? "")}</span>
             <p>{props?.data?.content}</p>
+            
             <div className="flex gap-10">
                 <div className="flex">
                     <svg

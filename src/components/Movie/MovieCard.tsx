@@ -1,16 +1,62 @@
 import { Link } from "react-router-dom";
 import { IMovie } from "../../types/Movie.types";
 import { useState } from "react";
+import MovieCardHover from "./MovieCardHover";
+import { useFetch } from "../../hooks/useFetch";
+import { BEARER_TOKEN } from "../../data/token";
+import { IVideo } from "../../types/Video.types";
+
+interface IVideos {
+  id: number;
+  results: Array<IVideo>
+}
 
 export default function MovieCard({ movie }: { movie: IMovie }) {
   const [posterpath, setPosterpath] = useState(movie.poster_path)
-  
+  const [hover, setHover] = useState(false)
+  const [trailerDelay, setTrailerDelay] = useState(false)
+  const trailer = useFetch<IVideos>(`https://api.themoviedb.org/3/movie/${movie.id}/videos?language=en-US`,
+    {
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${BEARER_TOKEN}`
+      }
+    },
+    []
+  )
+
   const onErrorImg = () => {
     setPosterpath(undefined)
   }
 
+  const onMouseEnterFn = () => {
+    const time = setTimeout(() => {
+      setTrailerDelay(true)
+      clearTimeout(time)
+    }, 5000)
+
+    setHover(true)
+  }
+
+  const onMouseLeaveFn = () => {
+    setHover(false)
+    setTrailerDelay(false)
+  }
+
+  const hoverTrailer = () => {
+    if (trailerDelay && trailer.data && trailer.data.results.length > 0) {
+      return <iframe className="absolute top-0 left-0 h-full w-full" src={`https://www.youtube.com/embed/${trailer.data?.results[0].key}?autoplay=1&mute=1`} frameBorder='0'
+        allow='autoplay; encrypted-media'
+        allowFullScreen
+        title='video'
+      ></iframe>
+    }
+
+    return null
+  }
+
   return (
-    <Link to={`/movies/${movie.id}`} className="grid w-[256px] hover:cursor-pointer bg-black rounded-md overflow-hidden">
+    <Link to={`/movies/${movie.id}`} className="relative grid w-[256px] hover:cursor-pointer bg-black rounded-md overflow-hidden" onMouseEnter={onMouseEnterFn} onMouseLeave={onMouseLeaveFn}>
       <div className="h-[392px] w-full">
         {(posterpath) ?
           <img
@@ -35,6 +81,8 @@ export default function MovieCard({ movie }: { movie: IMovie }) {
           </span>
         </div>
       </div>
+      {hover ? <MovieCardHover movie={movie} /> : null}
+      {hover ? hoverTrailer() : null}
     </Link>
   );
 }

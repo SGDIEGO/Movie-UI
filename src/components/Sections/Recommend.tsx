@@ -16,8 +16,6 @@ export default function Recommend() {
   const [urlFetch, setUrlFetch] = useState("https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1")
 
   useEffect(() => {
-    console.log("ccc");
-
     switch (recommend) {
       case "movies":
         setUrlFetch("https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1")
@@ -62,9 +60,9 @@ export default function Recommend() {
 
   return (
     <section className="">
-      <div className="flex gap-4 justify-between">
-        <div className="flex">
-          <h3>Recommend</h3>
+      <div className="flex gap-4 justify-between my-5 place-items-center">
+        <div className="flex place-items-center gap-5">
+          <h3 className="font-semibold text-[24px]">Recommend</h3>
           <div className="flex gap-4">
             <button
               className={`button ${recommend === "movies"
@@ -88,22 +86,12 @@ export default function Recommend() {
             >
               <span>Series</span>
             </button>
-            <button
-              className={`button ${recommend === "animations"
-                ? "button-selected"
-                : "button-transparent"
-                }`}
-              onClick={() => {
-                setRecommend("animations");
-              }}
-            >
-              <span>Animation</span>
-            </button>
+
           </div>
         </div>
         <Link
           to={recommend}
-          className="flex justify-self-end hover:cursor-pointer"
+          className="hidden screen1:flex justify-self-end hover:cursor-pointer"
         >
           <span>View All</span>
           <svg
@@ -121,7 +109,7 @@ export default function Recommend() {
         </Link>
       </div>
 
-      <div className="grid grid-cols-4 place-items-center">
+      <div className="grid place-items-center gap-3 screen3:grid-cols-2 screen4:grid-cols-4">
         <RenderData />
       </div>
     </section>

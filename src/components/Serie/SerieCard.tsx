@@ -1,15 +1,26 @@
 import { useState } from "react";
 import { ISerie } from "../../types/Movie.types";
 import { Link } from "react-router-dom";
+import SerieCardHover from "./SerieCardHover";
 
 export default function SerieCard({ serie }: { serie: ISerie }) {
   const [posterPath, setPosterPath] = useState(serie.poster_path)
+  const [hover, setHover] = useState(false)
+
   const onErrorImg = () => {
     setPosterPath(undefined)
   }
 
+  const onMouseEnterFn = () => {
+    setHover(true)
+  }
+
+  const onMouseLeaveFn = () => {
+    setHover(false)
+  }
+
   return (
-    <Link to={`/movies/${serie.id}`} className="grid w-[256px] text-white hover:cursor-pointer">
+    <Link to={`/series/${serie.id}`} className="grid w-[256px] text-white hover:cursor-pointer" onMouseEnter={onMouseEnterFn} onMouseLeave={onMouseLeaveFn}>
       <div className="h-[392px] w-full relative">
         {(posterPath) ?
           <img
@@ -35,6 +46,8 @@ export default function SerieCard({ serie }: { serie: ISerie }) {
           </span>
         </div>
       </div>
+
+      {hover ? <SerieCardHover serie={serie} /> : null}
     </Link>
   );
 }

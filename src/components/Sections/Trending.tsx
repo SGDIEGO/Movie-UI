@@ -35,8 +35,8 @@ export default function Trending() {
 
   return (
     <section>
-      <h3>Trending</h3>
-      <div className="flex justify-between">
+      <h3 className="my-5 font-semibold text-[24px]">Trending</h3>
+      <div className="grid  place-content-center gap-5 screen5:grid-cols-3">
         <RenderMovies />
       </div>
     </section>

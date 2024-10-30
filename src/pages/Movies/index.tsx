@@ -28,7 +28,7 @@ export default function Movies() {
     return movies.map((movie, id) => <MovieCard key={id} movie={movie} />)
   }
 
-  return <div className="grid grid-cols-4 place-items-center items-start gap-y-4">
+  return <div className=" grid screen2:grid-cols-2 screen4:grid-cols-4 place-items-center items-start gap-y-4">
     {renderData()}
   </div>
 }

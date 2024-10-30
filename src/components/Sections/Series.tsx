@@ -20,16 +20,12 @@ export default function Series() {
     []
   );
 
-  // Render the series data
   function RenderData() {
-    // Check if the data is available
     if (data == null) return;
 
-    // Get the series data from the API response
     const series = (data as IAiringToday).results;
     const seriesToRender = series.slice(0, 4);
 
-    // Render the series as cards
     return seriesToRender.map((serie, id) => (
       <SerieCard key={id} serie={serie} />
     ));
@@ -37,8 +33,8 @@ export default function Series() {
 
   return (
     <section className="">
-      <h1>New Release - Series</h1>
-      <div className="flex justify-between gap-3">
+      <h3 className="my-5 font-semibold text-[24px]">New Release - Series</h3>
+      <div className="grid place-items-center gap-3 screen3:grid-cols-2 screen4:grid-cols-4">
         <RenderData />
       </div>
     </section>
